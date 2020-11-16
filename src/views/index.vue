@@ -91,16 +91,18 @@
       </div>
     </div>
     <!-- 新品上线 -->
-    <goods-list :goods="imgList.newGoodses"></goods-list>
+    <goods-list :goods="imgList.newGoodses">新品上线</goods-list>
     <!-- 热门商品 -->
-    <goods-list :goods="imgList.hotGoodses"></goods-list>
+    <goods-list :goods="imgList.hotGoodses">热门商品</goods-list>
     <!-- 最新推荐 -->
-    <goods-list :goods="imgList.recommendGoodses"></goods-list>
+    <goods-list :goods="imgList.recommendGoodses">最新推荐</goods-list>
+    <xf-bar></xf-bar>
   </div>
 </template>
 
 <script>
 export default {
+  name: "keep",
   data() {
     return {
       headerColor: false,
@@ -156,6 +158,7 @@ export default {
     align-items: center;
     span {
       color: #787878;
+      text-align: center;
       &:nth-child(1) {
         color: #1baeae;
         font-size: 18px;
@@ -199,11 +202,22 @@ export default {
     vertical-align: middle;
   }
 }
+@media screen and (min-width: 768px) {
+  .van-swipe-item {
+    margin-top: 50px;
+    /deep/img {
+      width: 100%;
+      height: 248px;
+      vertical-align: middle;
+    }
+  }
+}
 .menu_table {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   width: 100%;
+  text-align: center;
   div {
     width: 20%;
     padding: 16px 0;

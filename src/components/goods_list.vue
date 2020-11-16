@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="goods_title">新品上线</div>
+    <div class="goods_title"><slot></slot></div>
     <div class="goods_body">
       <div class="goods_item" v-for="item in goods" :key="item.goodsId">
         <img
@@ -40,6 +40,7 @@ export default {
     height: 192px;
     padding: 10px;
     border-bottom: 2px solid #f9f9f9;
+    text-align: center;
     &:nth-child(2n) {
       border-left: 2px solid #f9f9f9;
     }
@@ -48,7 +49,7 @@ export default {
       height: 120px;
     }
     p {
-      height: 32px;
+      height: 36px;
     }
     .price {
       color: #1baeae;

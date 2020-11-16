@@ -1,12 +1,14 @@
 <template>
-  <div>
+  <div class="body">
     <div class="bar">
-      <div v-for="(item, index) in icon" :key="index" class="icon">
-        <van-icon
-          :class="{ green: pathId === index }"
-          :name="item.icon"
-          size="22px"
-        />
+      <div
+        :class="{ green: pathId === index }"
+        v-for="(item, index) in icon"
+        :key="index"
+        class="icon"
+        @click="jump(index, item.path)"
+      >
+        <van-icon :name="item.icon" size="22px" />
         <div>{{ item.name }}</div>
       </div>
     </div>
@@ -14,39 +16,52 @@
 </template>
 
 <script>
+import { mapMutations, mapState, mapGetters } from "vuex";
 export default {
   data() {
     return {
-      pathId: 1,
+      pathId: 0,
       icon: [
         {
           name: "首页",
           icon: "shop-o",
+          path: "/index",
         },
         {
           name: "分类",
           icon: "qr",
+          path: "/category",
         },
         {
           name: "购物车",
           icon: "cart-o",
+          path: "/cart",
         },
         {
           name: "我的",
           icon: "user-o",
+          path: "/user",
         },
       ],
     };
   },
-  created() {
-    console.log(this.$route);
+  mounted() {
     this.pathId = this.$route.meta.id;
+  },
+  computed: {},
+  methods: {
+    jump(index, path) {
+      if (path !== this.$route.path) {
+        this.$router.push(path);
+      }
+    },
   },
 };
 </script>
 
 <style lang="less" scoped>
-div {
+.body {
+  z-index: 999;
   &::after {
     content: "";
     display: block;
@@ -56,20 +71,24 @@ div {
     position: fixed;
     display: flex;
     justify-content: space-between;
-    line-height: 50px;
     text-align: center;
     height: 50px;
-    bottom: 0;
+    bottom: -1px;
     width: 100%;
     background-color: white;
     .icon {
       flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
       .van-icon {
         display: block;
-        line-height: 30px;
+        font-size: 16px;
+        width: 100%;
       }
       div {
-        line-height: 20px;
+        font-size: 16px;
       }
     }
     .green {
